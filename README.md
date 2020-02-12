@@ -1,6 +1,5 @@
 
 
-![Logo GitHub](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6YbjP5vT1VgTVr0p2ChwgAtmXZiiF0JuWCKDnEYgcNDqndVkF)
 ![SqlServer](https://cdn.freebiesupply.com/logos/thumbs/2x/microsoft-sql-server-logo.png)
 
 # Notificacion de Eventos de Ponches.
