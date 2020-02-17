@@ -15,9 +15,18 @@
 -----
 ### Strore Procedure en las bases de datos que ralizan las notificaciones al personal.
 
+
+
+
+
 - Sp_PersonasConAnomaliasenAlmuerzo
 - Sp_PersonasConAnomaliasenPonches
 - Sp_PersonasQueDEbenPoncharYNoPonchan
+
+
+  ### Con estos dos procedimientos se crea el procedimiento de enviar personas que no ponchan a RRHH y Encargados 
+ - [Sp_PersonasQueDEbenPoncharYNoPonchan_rrhh]
+ - [Sp_PersonasQueDEbenPoncharYNoPonchan_ENCARGADOS]sql
 
 --------
 
