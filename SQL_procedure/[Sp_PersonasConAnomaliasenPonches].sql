@@ -16,7 +16,7 @@ as
     
 declare @Mensaje varchar(1000);    
     
-declare @email varchar(500) =     
+declare @email varchar(1000) =     
 (    
     
 SELECT     
@@ -59,12 +59,12 @@ SET @TableHead = '<html><head>' + '<style>'
     + '</style>' + '</head>' + '<body>' + '<h1>Reporte de Eventos Entrada Tardias : ' + @fecha +'  </h1> '    
     + CONVERT(VARCHAR(50), GETDATE(), 100)     
     + ' <br> <table cellpadding=0 cellspacing=0 border=0>'     
-    + '<tr> <td bgcolor=#E6E6FA><b>Cédula</b></td>'    
+    + '<tr> <td bgcolor=#E6E6FA><b>Cï¿½dula</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Nombres</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Fecha</b></td>'    
     + '<td bgcolor=#ffffb3><b>Hora</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Departamento</b></td>'    
-    + '<td bgcolor=#E6E6FA><b>Código Reloj</b></td>'    
+    + '<td bgcolor=#E6E6FA><b>Cï¿½digo Reloj</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Sucursal</b></td></tr>' ;    
     
 SET @Body = (    
@@ -196,12 +196,12 @@ SET @TableHead = '<html><head>' + '<style>'
        '<h4>' + @Mensaje+ '</h4>'    
     + CONVERT(VARCHAR(50), GETDATE(), 100)     
     + ' <br> <table cellpadding=0 cellspacing=0 border=0>'     
-    + '<tr> <td bgcolor=#E6E6FA><b>Cédula</b></td>'    
+    + '<tr> <td bgcolor=#E6E6FA><b>Cï¿½dula</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Nombres</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Fecha</b></td>'    
     + '<td bgcolor=#ffffb3><b>Hora</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Departamento</b></td>'    
-    + '<td bgcolor=#E6E6FA><b>Código Reloj</b></td>'    
+    + '<td bgcolor=#E6E6FA><b>Cï¿½digo Reloj</b></td>'    
     + '<td bgcolor=#E6E6FA><b>Sucursal</b></td></tr>' ;    
     
 SET @Body = (    
