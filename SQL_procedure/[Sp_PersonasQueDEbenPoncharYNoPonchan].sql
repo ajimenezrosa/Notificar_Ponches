@@ -1,4 +1,5 @@
-    
+    use msdb
+	go
     
 /*    
     
@@ -11,10 +12,22 @@ where HORA < '11:00:00'
     
 */    
     
+--drop procedure [Sp_PersonasQueDEbenPoncharYNoPonchan]
+
+
+/*
+update [Genesis].[PonchesDB].[DatosReloj_Cargar]    
+set enviado =  0   
     
-CREATE procedure [dbo].[Sp_PersonasQueDEbenPoncharYNoPonchan]    
+where HORA < '11:00:00'    
+  and fecha = convert(varchar(10),getdate(),120)    
+*/
+
+    
+alter procedure [dbo].[Sp_PersonasQueDEbenPoncharYNoPonchan]    
 as    
-    
+
+
 /*Alejandro Jimenez    
 para determinar que la persona no se notifique a menos    
 que su hora de entrada sea menor a la hora de desarga de los ponches....    
@@ -24,6 +37,12 @@ que su hora de entrada sea menor a la hora de desarga de los ponches....
 --set enviado = 2  
 --where HORA < '11:00:00' and fecha = '2020-02-06'  
   
+  declare @enviar_corroe int = 0
+  
+  declare @enviar_corroe2 int = 0
+
+  declare @correoTransporte varchar(100) = ''
+
 declare @fechaentrada varchar(10)     
 SET @fechaentrada = CONVERT(char(2), DatePart (hh,GetDate())) + ':' + CONVERT(char(2), DatePart (mi,GetDate())) + ':00'    
     
@@ -162,6 +181,10 @@ select * from [Genesis].[PonchesDB].[DescripcionHoratios] where  dias = DATENAME
     
 SELECT  @Body = @TableHead + ISNULL(@Body, '') + @TableTail    
     
+
+if( @enviar_corroe = 1)
+begin
+
 EXEC sp_send_dbmail     
   @profile_name='SqlMail',    
   @copy_recipients ='jose.jimenez@INABIMA.GOB.DO',    
@@ -169,7 +192,8 @@ EXEC sp_send_dbmail
   @subject='Query Result',    
   @body=@Body ,    
   @body_format = 'HTML' ;    
-    
+
+end    
     
     
 /*    
@@ -200,6 +224,17 @@ set @Correo =
    Where  [activarEnvioCorreo]= 1    
     and enviado = 0    
 )    
+
+
+set @Body = '';
+
+print @correo
+
+set @correoTransporte = @Correo;
+
+set @Correo = 'jose.jimenez@inabima.gob.do'
+
+
 /*    
 =============================================================================================================    
 */    
@@ -346,6 +381,15 @@ select * from [Genesis].[PonchesDB].[DescripcionHoratios] where  dias = DATENAME
                   ELEMENTS    
             )    
     
+
+
+	/*print boby*/
+	
+	print @Body;
+    
+
+
+
 SELECT  @Body = @TableHead + ISNULL(@Body, '') + @TableTail    
 --set @mensaje = ''    
 --Set @Mensaje ='Reporte Personas que no Poncharon  :' + ( select distinct isnull(Depto,'') from [genesis].[PonchesDB].[SupervisoresCorreos] where [EMAILSUPERVISOR]  = @Correo)    
@@ -353,26 +397,45 @@ SELECT  @Body = @TableHead + ISNULL(@Body, '') + @TableTail
 declare @correo1 varchar(1000);    
 --set @Correo1 = 'jose.jimenez@inabima.gob.do'    
     
+
+
+
+if( @enviar_corroe2 = 1)
+begin
+
+--EXEC sp_send_dbmail     
+--  @profile_name='SqlMail',    
+--  @copy_recipients ='jose.jimenez@inabima.gob.do',    
+--  @recipients=  @correo,    -----   @email,  --'jose.jimenez@INABIMA.GOB.DO', --; ja.jimenezrosa@gmail.com',    
+--  @subject= @Mensaje  ,    
+--  @body=@Body ,    
+--  @body_format = 'HTML' ;    
+    
+    
 EXEC sp_send_dbmail     
   @profile_name='SqlMail',    
-  @copy_recipients ='jose.jimenez@inabima.gob.do',    
-  @recipients=  @correo,    -----   @email,  --'jose.jimenez@INABIMA.GOB.DO', --; ja.jimenezrosa@gmail.com',    
-  @subject= @Mensaje  ,    
+  @copy_recipients ='jose.jimenez@INABIMA.GOB.DO',    
+  @recipients=  @correo,  --'jose.jimenez@INABIMA.GOB.DO', --; ja.jimenezrosa@gmail.com',    
+  @subject='Query Result',    
   @body=@Body ,    
   @body_format = 'HTML' ;    
+
+
+ end   
     
-    
-    
-    
-    
-    
-  
-    
+if( @enviar_corroe2 = 0)
+begin
+ --select @Body
+ print @Body;
+ end   
+   print @Body;
+    --select @Body
     
 /*    
 =============================================================================================================    
 */    
     
+set @Correo = @correoTransporte;
     
 update [genesis].[PonchesDB].[SupervisoresCorreos]     
  set enviado = 1     
@@ -402,4 +465,9 @@ end
     
 end     
     
-    
+
+go
+
+
+
+exec [Sp_PersonasQueDEbenPoncharYNoPonchan]    

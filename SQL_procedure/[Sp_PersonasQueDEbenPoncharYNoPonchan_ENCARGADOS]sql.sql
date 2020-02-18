@@ -3,17 +3,17 @@
 
 
 
-ALTER procedure [dbo].[Sp_PersonasQueDEbenPoncharYNoPonchan_ENCARGADOS]   
+ALTER procedure [dbo].Sp_PersonasQueDEbenPoncharYNoPonchan_rrhh   
 AS    
 
-while exists (    
-select distinct top 1 fecha, enviado from [Genesis].[PonchesDB].[DatosReloj_Cargar]    
-where enviado = 0 AND HORA < '11:00:00' and fecha >=convert(varchar(10),getdate()-3,120)    
+--while exists (    
+--select distinct top 1 fecha, enviado from [Genesis].[PonchesDB].[DatosReloj_Cargar]    
+--where enviado = 0 AND HORA < '11:00:00' and fecha >=convert(varchar(10),getdate()-3,120)    
     
-order by fecha asc    
+--order by fecha asc    
     
-)    
-BEGIN
+--)    
+--BEGIN
 
 
 declare @fecha varchar(10) = convert(varchar(10), getdate() , 120)
@@ -35,7 +35,7 @@ SELECT
   where id = 6    
 ) 
 
-set @email = 'jose.jimenez@inabima.gob.do'
+--set @email = 'jose.jimenez@inabima.gob.do'
 /*======================================================================================================================================================*/
 
 DECLARE @Body NVARCHAR(MAX),    
@@ -194,7 +194,7 @@ EXEC sp_send_dbmail
 
 
 
-END
+--END
 
 
 

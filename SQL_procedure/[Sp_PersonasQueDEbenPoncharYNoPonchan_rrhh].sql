@@ -1,15 +1,17 @@
 
+/*[Sp_PersonasQueDEbenPoncharYNoPonchan_rrhh]*/
 
-ALTER procedure [dbo].[Sp_PersonasQueDEbenPoncharYNoPonchan_rrhh]   
+
+ALTER procedure [dbo].[Sp_PersonasQueDEbenPoncharYNoPonchan_ENCARGADOS]   
 AS    
-while exists (    
-select distinct top 1 fecha, enviado from [Genesis].[PonchesDB].[DatosReloj_Cargar]    
-where enviado = 0 AND HORA < '11:00:00' and fecha >=convert(varchar(10),getdate()-3,120)    
+--while exists (    
+--select distinct top 1 fecha, enviado from [Genesis].[PonchesDB].[DatosReloj_Cargar]    
+--where enviado = 0 AND HORA < '11:00:00' and fecha >=convert(varchar(10),getdate()-3,120)    
     
-order by fecha asc    
+--order by fecha asc    
     
-)    
-BEGIN
+--)    
+--BEGIN
 
 
 
@@ -33,7 +35,7 @@ SELECT
   where id = 6    
 ) 
 
-set @email = 'jose.jimenez@inabima.gob.do'
+--set @email = 'jose.jimenez@inabima.gob.do'
 /*======================================================================================================================================================*/
 
 DECLARE @Body NVARCHAR(MAX),    
@@ -226,7 +228,7 @@ SELECT  @Body = @TableHead + ISNULL(@Body, '') + @TableTail
 EXEC sp_send_dbmail     
   @profile_name='SqlMail',    
   @copy_recipients ='jose.jimenez@INABIMA.GOB.DO',    
-  @recipients=  @email,  --'jose.jimenez@INABIMA.GOB.DO', --; ja.jimenezrosa@gmail.com',    
+  @recipients=  @correo,  --'jose.jimenez@INABIMA.GOB.DO', --; ja.jimenezrosa@gmail.com',    
   @subject=   @Mensaje,    
   @body=@Body ,    
   @body_format = 'HTML' ;    
@@ -250,7 +252,7 @@ update [genesis].[PonchesDB].[SupervisoresCorreos]
 
 
 
-END
+--END
 
 
 
