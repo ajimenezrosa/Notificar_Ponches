@@ -100,7 +100,7 @@ estos ser ensamblarian de la siguiente forma:
 
 
 
-
+Describimos la conformacion de los Html de los correos enviados.
 ~~~sql
 SET @TableTail = '</table></body></html>' ;  
 SET @TableHead = '<html><head>' + '<style>'  
@@ -117,7 +117,9 @@ SET @TableHead = '<html><head>' + '<style>'
     + '<td bgcolor=#E6E6FA><b>Sucursal</b></td></tr>' ;  
 ~~~
 
+Descripcion del contenido del Body del Html , con esto se crearia los registros y ventos de cada persona..
 
+Insertamos estos registros en el @Body.
 ~~~sql
   SET @Body = (  
 select   
